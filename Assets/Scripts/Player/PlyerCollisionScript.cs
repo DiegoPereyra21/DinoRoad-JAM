@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlyerCollisionScript : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PlyerCollisionScript : MonoBehaviour
         if (collision.transform.tag == "Obstacle")
         {
             Destroy(gameObject);
-            Debug.Log("You Die");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
