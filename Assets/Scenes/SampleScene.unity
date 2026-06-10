@@ -304,8 +304,8 @@ MonoBehaviour:
   - {fileID: 4953423085338472889, guid: 8cbc88bb0d4c34949b0c6d6564ae4336, type: 3}
   - {fileID: 8127183477525764335, guid: 31733fe4c1b1bdc408ef6c462f654a14, type: 3}
   - {fileID: 7446918257996217708, guid: 4962e64b3f495944cafa033d04d0172a, type: 3}
-  obstacleSpawnInterval: 1.7
-  speedObstacle: 7
+  obstacleSpawnInterval: 1.5
+  speedObstacle: 13
 --- !u!1 &614851985
 GameObject:
   m_ObjectHideFlags: 0
