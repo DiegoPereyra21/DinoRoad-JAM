@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float velocidad = 5f;
-    public float fuerzaSalto = 7f;
+    public float fuerzaSalto = 22f;
 
     [Range(0f, 1f)]
     public float corteSalto = 0.5f; // cuanto se le baja al salto si suelta antes
