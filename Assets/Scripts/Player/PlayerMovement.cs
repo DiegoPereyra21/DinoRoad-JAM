@@ -16,8 +16,22 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 volumenCaja = new Vector2(0.5f, 0.1f);
     public LayerMask capaSuelo;
 
+    [Header("Agacharse")]
+    public Sprite spriteAgachado;        // el sprite del circulo
+    public float escalaYAgachado = 1f;   // para que el circulo no quede ovalado
+    public bool frenarAlAgacharse = true;
+    public float velocidadAgachado = 2f;
+    public bool noSaltaAgachado = true;
+    public Collider2D colliderParado;    // el polygon collider del triangulo
+    public Collider2D colliderAgachado;  // el circle collider 2d
+
     Rigidbody2D rb;
     Animator anim;
+    SpriteRenderer sr;
+
+    Sprite spriteParado;
+    float escalaYParado; // me guardo la altura original para volver
+    bool agachado;
 
     float inputX;
     bool enSuelo;
@@ -29,6 +43,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+
+        if (sr != null) spriteParado = sr.sprite; // guardo el del triangulo
+        escalaYParado = transform.localScale.y;
     }
 
     void Update()
@@ -46,10 +64,20 @@ public class PlayerMovement : MonoBehaviour
 
         enSuelo = Physics2D.OverlapBox(piesCheck.position, volumenCaja, 0f, capaSuelo);
 
+        // para agacharme tengo que estar en el piso, pero para mantenerme agachado
+        // solo miro que siga apretada la tecla (sino parpadea entre las dos formas)
+        bool teclaAbajo = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+
+        if (teclaAbajo && !agachado)
+            Agacharse();
+        else if (!teclaAbajo && agachado)
+            Levantarse();
+
         if (anim != null)
         {
             anim.SetBool("enSuelo", enSuelo);
             anim.SetFloat("velocidad", Mathf.Abs(inputX));
+            anim.SetBool("agachado", agachado);
         }
 
         if (inputX > 0)
@@ -60,9 +88,13 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(inputX * velocidad, rb.linearVelocity.y);
+        // si estoy agachado me muevo mas lento
+        float velActual = (agachado && frenarAlAgacharse) ? velocidadAgachado : velocidad;
+        rb.linearVelocity = new Vector2(inputX * velActual, rb.linearVelocity.y);
 
-        if (quiereSaltar && enSuelo)
+        bool puedeSaltar = enSuelo && !(agachado && noSaltaAgachado);
+
+        if (quiereSaltar && puedeSaltar)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, fuerzaSalto);
         }
@@ -77,6 +109,26 @@ public class PlayerMovement : MonoBehaviour
         }
 
         AplicarGravedadExtra();
+    }
+
+    void Agacharse()
+    {
+        agachado = true;
+        if (sr != null && spriteAgachado != null) sr.sprite = spriteAgachado;
+        // achico la altura para que el circulo quede redondo y no estirado
+        transform.localScale = new Vector3(transform.localScale.x, escalaYAgachado, transform.localScale.z);
+        if (colliderParado != null) colliderParado.enabled = false;
+        if (colliderAgachado != null) colliderAgachado.enabled = true;
+    }
+
+    void Levantarse()
+    {
+        agachado = false;
+        if (sr != null) sr.sprite = spriteParado;
+        // devuelvo la altura original
+        transform.localScale = new Vector3(transform.localScale.x, escalaYParado, transform.localScale.z);
+        if (colliderParado != null) colliderParado.enabled = true;
+        if (colliderAgachado != null) colliderAgachado.enabled = false;
     }
 
     void AplicarGravedadExtra()
