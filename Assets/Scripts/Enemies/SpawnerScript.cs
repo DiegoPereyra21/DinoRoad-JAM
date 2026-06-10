@@ -1,0 +1,41 @@
+using UnityEngine;
+
+public class SpawnerScript : MonoBehaviour
+{
+    //array con los prefabs de los obstaculos
+    [SerializeField] private GameObject[] obstaclePrefabs;
+    public float obstacleSpawnInterval = 2f;
+    private float timeUntilNextSpawn;
+
+    [SerializeField] private float speedObstacle = 5f;
+
+    private void Update()
+    {
+        SpawnLoop();
+    }
+
+    private void SpawnLoop()
+    {
+        //Temporizador entre cada spawn de obstaculo
+        timeUntilNextSpawn += Time.deltaTime;
+        if (timeUntilNextSpawn >= obstacleSpawnInterval)
+        {
+            SpawnObstacle();
+            timeUntilNextSpawn = 0f;
+        }
+    }
+
+    private void SpawnObstacle()
+    {
+        //elige aleatoriamente un prefab del array y lo instancia en la posicion del spawner con su misma rotacion
+        GameObject obstacleToSpawn = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
+        GameObject obstacle = Instantiate(obstacleToSpawn, transform.position, Quaternion.identity);
+        //le doy movimiento perpetuo hacia la izquierda al obstaculo con una respectiva velocidad
+        Rigidbody2D rb = obstacle.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.left * speedObstacle;
+        }
+    }
+
+}
