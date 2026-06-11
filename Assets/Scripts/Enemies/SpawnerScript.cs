@@ -6,11 +6,13 @@ public class SpawnerScript : MonoBehaviour
     [SerializeField] private GameObject[] obstaclePrefabs;
     public float obstacleSpawnInterval = 2f;
     private float timeUntilNextSpawn;
+    private float increase= 0.1f;
 
     [SerializeField] private float speedObstacle = 5f;
 
     private void Update()
     {
+        speedObstacle += increase * Time.deltaTime;
         SpawnLoop();
     }
 
