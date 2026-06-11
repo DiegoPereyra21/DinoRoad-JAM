@@ -13,7 +13,8 @@ public class ButtonScript : MonoBehaviour
     public int dinoIndex;
     //costo base que la idea es cambiarlo en cada dino
     public int costCharacter = 15;
-
+    //para actualizar los puntos en el menu
+    [SerializeField] private GameOverManager gameOverManager;
 
 
     private void Start()
@@ -42,7 +43,7 @@ public class ButtonScript : MonoBehaviour
         if (CoinManager.TotalCoins >= costCharacter)
         {
             CoinManager.TotalCoins -= 15;
-
+            gameOverManager.UpdatePoints();
             UnlockCharacter();
 
             buttonBuy.gameObject.SetActive(false);

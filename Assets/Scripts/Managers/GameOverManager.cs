@@ -9,6 +9,10 @@ public class GameOverManager : MonoBehaviour
     public TextMeshProUGUI textFinalCoin;
     void Start()
     {
+        UpdatePoints();
+    }
+    public void UpdatePoints()
+    {
         int FinalScore = PlayerPrefs.GetInt("FinalScore", 0);
         textFinalScore.text = "Score: " + FinalScore.ToString();
 
@@ -17,6 +21,5 @@ public class GameOverManager : MonoBehaviour
 
         int TotalCoins = CoinManager.TotalCoins;
         textFinalCoin.text = "Coins: " + TotalCoins.ToString();
-
     }
 }

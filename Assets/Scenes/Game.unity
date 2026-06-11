@@ -675,7 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f96c5804ab1f44e9d74635a018de66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 22
+  jumpForce: 17
   jumpCut: 0.5
   fallMultiplier: 2.5
   riseMultiplier: 2
@@ -1218,7 +1218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f96c5804ab1f44e9d74635a018de66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 22
+  jumpForce: 20
   jumpCut: 0.5
   fallMultiplier: 2.5
   riseMultiplier: 2
@@ -1500,7 +1500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f96c5804ab1f44e9d74635a018de66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 22
+  jumpForce: 23
   jumpCut: 0.5
   fallMultiplier: 2.5
   riseMultiplier: 2
@@ -1945,7 +1945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f96c5804ab1f44e9d74635a018de66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 22
+  jumpForce: 15
   jumpCut: 0.5
   fallMultiplier: 2.5
   riseMultiplier: 2
