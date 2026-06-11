@@ -1250,7 +1250,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonBuy: {fileID: 740391163}
   buttonEquip: {fileID: 89932559}
-  costCharacter: 15
+  characterID: Character_3
+  costCharacter: 65
 --- !u!1 &723945425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,7 +1753,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonBuy: {fileID: 500635303}
   buttonEquip: {fileID: 1180993006}
-  costCharacter: 15
+  characterID: Character_2
+  costCharacter: 45
 --- !u!1 &984558242
 GameObject:
   m_ObjectHideFlags: 0
@@ -3227,7 +3229,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonBuy: {fileID: 1399055872}
   buttonEquip: {fileID: 1756629296}
-  costCharacter: 15
+  characterID: Character_1
+  costCharacter: 30
 --- !u!1 &2012678488
 GameObject:
   m_ObjectHideFlags: 0
