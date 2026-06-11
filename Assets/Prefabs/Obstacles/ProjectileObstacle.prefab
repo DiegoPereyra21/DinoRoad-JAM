@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6790099186601522746}
   - component: {fileID: 4164125036924759013}
   - component: {fileID: 2176185543857230946}
+  - component: {fileID: 5373033548869046336}
+  - component: {fileID: 402741605816826005}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Obstacle
@@ -138,6 +140,43 @@ PolygonCollider2D:
       - {x: -0.58514196, y: -0.29356354}
       - {x: 0.6732484, y: 0.25242782}
   m_UseDelaunayMesh: 0
+--- !u!95 &5373033548869046336
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4220593154791764534}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a23f28e212d079241b0eca8b0e0bf653, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &402741605816826005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4220593154791764534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25a268de0c9b9440bdcbeb6a32282be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  flyAmplitude: 1
+  flySpeed: 3
 --- !u!1 &4953423085338472889
 GameObject:
   m_ObjectHideFlags: 0
