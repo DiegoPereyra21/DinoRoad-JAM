@@ -201,7 +201,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 89932560}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 685977033}
+        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
+        m_MethodName: EquipCharacter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &89932560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,14 +576,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 5167926156991472794, guid: ecd97aa0a11a67d41b4fdec04272c834, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -639,14 +651,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.2783019, g: 0.28031403, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 5167926156991472794, guid: ecd97aa0a11a67d41b4fdec04272c834, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1250,7 +1262,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonBuy: {fileID: 740391163}
   buttonEquip: {fileID: 89932559}
-  characterID: Character_3
+  textButtonEquip: {fileID: 2112828042}
+  dinoIndex: 3
   costCharacter: 65
 --- !u!1 &723945425
 GameObject:
@@ -1753,7 +1766,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonBuy: {fileID: 500635303}
   buttonEquip: {fileID: 1180993006}
-  characterID: Character_2
+  textButtonEquip: {fileID: 984558244}
+  dinoIndex: 2
   costCharacter: 45
 --- !u!1 &984558242
 GameObject:
@@ -2211,9 +2225,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2116047485}
-        m_TargetAssemblyTypeName: MenuShopSystem, Assembly-CSharp
-        m_MethodName: BuyCharacter2
+      - m_Target: {fileID: 974537562}
+        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
+        m_MethodName: EquipCharacter
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3002,7 +3016,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1756629297}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1990505229}
+        m_TargetAssemblyTypeName: ButtonScript, Assembly-CSharp
+        m_MethodName: EquipCharacter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1756629297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3111,14 +3137,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.11251116, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 5167926156991472794, guid: ecd97aa0a11a67d41b4fdec04272c834, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3229,7 +3255,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonBuy: {fileID: 1399055872}
   buttonEquip: {fileID: 1756629296}
-  characterID: Character_1
+  textButtonEquip: {fileID: 1537549691}
+  dinoIndex: 1
   costCharacter: 30
 --- !u!1 &2012678488
 GameObject:
