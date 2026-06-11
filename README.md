@@ -30,26 +30,26 @@ Mecanicas del juego: saltar y agacharse.
 
 Assets Used
 
-Dino Characters by Arks
+- Dino Characters by Arks
 https://arks.itch.io/dino-characters?download
 
-Pixel Art Bat by tecopena
+- Pixel Art Bat by tecopena
 https://tecopena.itch.io/pixel-art-bat
 
-Sprite Pack 8 by GrafxKid
+- Sprite Pack 8 by GrafxKid
 https://grafxkid.itch.io/sprite-pack-8
 
-Predator Plant Mob Sprites by Free Game Assets
+- Predator Plant Mob Sprites by Free Game Assets
 https://free-game-assets.itch.io/free-predator-plant-mobs-pixel-art-pack
 
-Farmer Story Asset and Backgrounds by Alpatyk
+- Farmer Story Asset and Backgrounds by Alpatyk
 https://alpatyk.itch.io/free-asset-farmer-story-sprites-and-backgrounds
 
-Rocky Roads by Essssam
+- Rocky Roads by Essssam
 https://essssam.itch.io/rocky-roads
 
-UI Pack - Pixel Adventure by Kenney
+- UI Pack - Pixel Adventure by Kenney
 https://kenney.nl/assets/ui-pack-pixel-adventure
 
-Raven Fanyasy Icons by Clockwork Raven
+- Raven Fanyasy Icons by Clockwork Raven
 https://clockworkraven.itch.io/raven-fantasy-icons
