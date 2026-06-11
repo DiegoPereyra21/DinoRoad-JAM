@@ -27,7 +27,7 @@ public class PlayerDeath : MonoBehaviour
         movement.enabled = false;
         rb.linearVelocity = Vector2.zero;
 
-        // congelo todo el juego pero dejo al animator en tiempo real
+        // congeloo todo el juego pero dejo al animator en tiempo real
         // para que la animacion de muerte se reproduzca igual
         anim.updateMode = AnimatorUpdateMode.UnscaledTime;
         Time.timeScale = 0f;
