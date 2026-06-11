@@ -622,7 +622,7 @@ GameObject:
   - component: {fileID: 684618743}
   - component: {fileID: 684618742}
   m_Layer: 6
-  m_Name: Dino2
+  m_Name: Dino1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1028,8 +1028,8 @@ MonoBehaviour:
   dinosaurios:
   - {fileID: 1446907130}
   - {fileID: 684618741}
-  - {fileID: 1239616321}
   - {fileID: 1436739901}
+  - {fileID: 1239616321}
 --- !u!4 &1160828853
 Transform:
   m_ObjectHideFlags: 0
@@ -1447,7 +1447,7 @@ GameObject:
   - component: {fileID: 1436739903}
   - component: {fileID: 1436739902}
   m_Layer: 6
-  m_Name: Dino4
+  m_Name: Dino2
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1685,7 +1685,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: 3980471565588570874, guid: ecd97aa0a11a67d41b4fdec04272c834, type: 3}
-  m_Color: {r: 0.09387112, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1734,7 +1734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1446907132
 Rigidbody2D:
   serializedVersion: 5
@@ -6484,8 +6484,8 @@ SceneRoots:
   - {fileID: 544569889}
   - {fileID: 1446907134}
   - {fileID: 684618750}
-  - {fileID: 1239616330}
   - {fileID: 1436739910}
+  - {fileID: 1239616330}
   - {fileID: 1234999041}
   - {fileID: 704212982}
   - {fileID: 1752757883}
