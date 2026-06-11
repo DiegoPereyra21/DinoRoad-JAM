@@ -900,7 +900,7 @@ Transform:
   m_GameObject: {fileID: 1446907130}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.07, y: -3.68, z: 0}
+  m_LocalPosition: {x: -5.07, y: -3.51, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1019,23 +1019,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f96c5804ab1f44e9d74635a018de66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 5
-  fuerzaSalto: 23
-  corteSalto: 0.5
-  multiplicadorCaida: 2.5
-  multiplicadorSubida: 2
-  piesCheck: {fileID: 614851986}
-  volumenCaja: {x: 0.5, y: 0.1}
-  capaSuelo:
+  moveSpeed: 5
+  jumpForce: 22
+  jumpCut: 0.5
+  fallMultiplier: 2.5
+  riseMultiplier: 2
+  groundCheckSize: {x: 0.5, y: 0.1}
+  groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  spriteAgachado: {fileID: 5790736894352482622, guid: ecd97aa0a11a67d41b4fdec04272c834, type: 3}
-  escalaYAgachado: 1
-  frenarAlAgacharse: 1
-  velocidadAgachado: 2
-  noSaltaAgachado: 1
-  colliderParado: {fileID: 1446907137}
-  colliderAgachado: {fileID: 1446907139}
+  slowWhileCrouching: 1
+  crouchSpeed: 2
+  cantJumpCrouched: 1
+  standingCollider: {fileID: 1446907137}
+  crouchingCollider: {fileID: 1446907139}
+  fastFallForce: 80
+  maxFallSpeed: 25
 --- !u!95 &1446907141
 Animator:
   serializedVersion: 7
