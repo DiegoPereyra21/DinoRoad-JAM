@@ -184,7 +184,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tileset_forest_green1_0: 1392939429772935124
+      tileset_forest_green1_1: 8388577812807831079
+      tileset_forest_green1_2: 4612262903125206463
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
