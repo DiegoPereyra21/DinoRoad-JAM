@@ -2,10 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 public class MenuSystem : MonoBehaviour
-{ 
-    public TextMeshProUGUI CoinTextRef;
-
-
+{
     public void Play()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
