@@ -36,6 +36,8 @@ public class SpawnerScript : MonoBehaviour
         {
             rb.linearVelocity = Vector2.left * speedObstacle;
         }
+
+        Destroy(obstacle, 5f);
     }
 
 }
