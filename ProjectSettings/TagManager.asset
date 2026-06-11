@@ -9,7 +9,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - suelo
+  - Ground
   - Water
   - UI
   - Player
