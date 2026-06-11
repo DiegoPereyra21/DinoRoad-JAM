@@ -7,6 +7,7 @@ public class Score : MonoBehaviour
     public TextMeshProUGUI scoreText;
     [SerializeField] private float scoreMultiplier = 1f;
     public int finalScore;
+    public bool nivel2 = false;
     void Start()
     {
         scoreText.text = "Score: " + score.ToString();
@@ -16,6 +17,10 @@ public class Score : MonoBehaviour
     {
         addscore(1 * Time.deltaTime * scoreMultiplier);
         scoreMultiplier += 0.001f;
+        if (score > 100 && nivel2 == false)
+        {
+            nivel2 = true;
+        }
     }
     public void addscore(float points)
     {

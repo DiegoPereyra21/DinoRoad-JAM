@@ -351,7 +351,11 @@ MonoBehaviour:
   - {fileID: 4953423085338472889, guid: 8cbc88bb0d4c34949b0c6d6564ae4336, type: 3}
   - {fileID: 8127183477525764335, guid: 31733fe4c1b1bdc408ef6c462f654a14, type: 3}
   - {fileID: 7446918257996217708, guid: 4962e64b3f495944cafa033d04d0172a, type: 3}
+  obstacleNivel2Prefabs:
+  - {fileID: 2391205717052931955, guid: dba4190038bb6fe4996368a323a006fb, type: 3}
+  - {fileID: 3943479899042679489, guid: 632baf3ad3a6cf1428942c6e338b71dc, type: 3}
   obstacleSpawnInterval: 1
+  scoreObject: {fileID: 1752757881}
   speedObstacle: 13
 --- !u!1 &572596698
 GameObject:
@@ -2026,6 +2030,7 @@ MonoBehaviour:
   scoreText: {fileID: 572596699}
   scoreMultiplier: 1
   finalScore: 0
+  nivel2: 0
 --- !u!4 &1752757883
 Transform:
   m_ObjectHideFlags: 0
