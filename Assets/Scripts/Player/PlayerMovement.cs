@@ -2,51 +2,44 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float velocidad = 5f;
-    public float fuerzaSalto = 22f;
+    public float moveSpeed = 5f;
+    public float jumpForce = 22f;
 
     [Range(0f, 1f)]
-    public float corteSalto = 0.5f; // cuanto se le baja al salto si suelta antes
+    public float jumpCut = 0.5f; // cuanto se le baja al salto si suelta antes
 
     [Header("Sensacion de salto")]
-    public float multiplicadorCaida = 2.5f;  // que tan pesado cae (mas alto = cae mas rapido)
-    public float multiplicadorSubida = 2f;    // que tan rapido sube cuando NO mantiene la tecla
+    public float fallMultiplier = 2.5f;  // que tan pesado cae (mas alto = cae mas rapido)
+    public float riseMultiplier = 2f;    // baja mas rapido si ya solto la tecla subiendo
 
-    public Transform piesCheck;
-    public Vector2 volumenCaja = new Vector2(0.5f, 0.1f);
-    public LayerMask capaSuelo;
+    public Vector2 groundCheckSize = new Vector2(0.5f, 0.1f);
+    public LayerMask groundLayer;
 
     [Header("Agacharse")]
-    public Sprite spriteAgachado;        // el sprite del circulo
-    public float escalaYAgachado = 1f;   // para que el circulo no quede ovalado
-    public bool frenarAlAgacharse = true;
-    public float velocidadAgachado = 2f;
-    public bool noSaltaAgachado = true;
-    public Collider2D colliderParado;    // el polygon collider del triangulo
-    public Collider2D colliderAgachado;  // el circle collider 2d
+    public bool slowWhileCrouching = true;
+    public float crouchSpeed = 2f;
+    public bool cantJumpCrouched = true;
+    public Collider2D standingCollider;
+    public Collider2D crouchingCollider;
+
+    [Header("Caida rapida")]
+    public float fastFallForce = 80f;     // agacharse en el aire empuja para abajo
+    public float maxFallSpeed = 25f;
 
     Rigidbody2D rb;
     Animator anim;
-    SpriteRenderer sr;
 
-    Sprite spriteParado;
-    float escalaYParado; // me guardo la altura original para volver
-    bool agachado;
-
+    bool crouching;
     float inputX;
-    bool enSuelo;
-    bool quiereSaltar;
-    bool soltoSalto;
-    bool manteniendoSalto;
+    bool grounded;
+    bool wantsToJump;
+    bool releasedJump;
+    bool holdingJump;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
-
-        if (sr != null) spriteParado = sr.sprite; // guardo el del triangulo
-        escalaYParado = transform.localScale.y;
     }
 
     void Update()
@@ -54,30 +47,33 @@ public class PlayerMovement : MonoBehaviour
         inputX = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-            quiereSaltar = true;
+            wantsToJump = true;
 
         if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
-            soltoSalto = true;
+            releasedJump = true;
 
         // se mantiene apretada alguna tecla de salto?
-        manteniendoSalto = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+        holdingJump = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
 
-        enSuelo = Physics2D.OverlapBox(piesCheck.position, volumenCaja, 0f, capaSuelo);
+        // el chequeo de piso sale del borde de abajo del collider activo,
+        // asi no se desajusta si cambio el sprite o la escala
+        Collider2D currentCollider = crouching ? crouchingCollider : standingCollider;
+        Vector2 groundCheckPos = new Vector2(currentCollider.bounds.center.x, currentCollider.bounds.min.y);
+        grounded = Physics2D.OverlapBox(groundCheckPos, groundCheckSize, 0f, groundLayer);
 
-        // para agacharme tengo que estar en el piso, pero para mantenerme agachado
-        // solo miro que siga apretada la tecla (sino parpadea entre las dos formas)
-        bool teclaAbajo = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+        // para mantenerme agachado solo miro la tecla (sino parpadea entre las dos formas)
+        bool downPressed = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
 
-        if (teclaAbajo && !agachado)
-            Agacharse();
-        else if (!teclaAbajo && agachado)
-            Levantarse();
+        if (downPressed && !crouching)
+            Crouch();
+        else if (!downPressed && crouching)
+            StandUp();
 
         if (anim != null)
         {
-            anim.SetBool("enSuelo", enSuelo);
-            anim.SetFloat("velocidad", Mathf.Abs(inputX));
-            anim.SetBool("agachado", agachado);
+            anim.SetBool("grounded", grounded);
+            anim.SetFloat("speed", Mathf.Abs(inputX));
+            anim.SetBool("crouching", crouching);
         }
 
         if (inputX > 0)
@@ -89,66 +85,67 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         // si estoy agachado me muevo mas lento
-        float velActual = (agachado && frenarAlAgacharse) ? velocidadAgachado : velocidad;
-        rb.linearVelocity = new Vector2(inputX * velActual, rb.linearVelocity.y);
+        float currentSpeed = (crouching && slowWhileCrouching) ? crouchSpeed : moveSpeed;
+        rb.linearVelocity = new Vector2(inputX * currentSpeed, rb.linearVelocity.y);
 
-        bool puedeSaltar = enSuelo && !(agachado && noSaltaAgachado);
+        bool canJump = grounded && !(crouching && cantJumpCrouched);
 
-        if (quiereSaltar && puedeSaltar)
+        if (wantsToJump && canJump)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, fuerzaSalto);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
-        quiereSaltar = false;
+        wantsToJump = false;
 
-        if (soltoSalto)
+        if (releasedJump)
         {
             if (rb.linearVelocity.y > 0f)
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * corteSalto);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * jumpCut);
 
-            soltoSalto = false;
+            releasedJump = false;
         }
 
-        AplicarGravedadExtra();
+        // agacharse en el aire = caida rapida
+        if (crouching && !grounded && rb.linearVelocity.y > -maxFallSpeed)
+        {
+            rb.linearVelocity += Vector2.down * fastFallForce * Time.fixedDeltaTime;
+        }
+
+        ApplyExtraGravity();
     }
 
-    void Agacharse()
+    void Crouch()
     {
-        agachado = true;
-        if (sr != null && spriteAgachado != null) sr.sprite = spriteAgachado;
-        // achico la altura para que el circulo quede redondo y no estirado
-        transform.localScale = new Vector3(transform.localScale.x, escalaYAgachado, transform.localScale.z);
-        if (colliderParado != null) colliderParado.enabled = false;
-        if (colliderAgachado != null) colliderAgachado.enabled = true;
+        crouching = true;
+        if (standingCollider != null) standingCollider.enabled = false;
+        if (crouchingCollider != null) crouchingCollider.enabled = true;
     }
 
-    void Levantarse()
+    void StandUp()
     {
-        agachado = false;
-        if (sr != null) sr.sprite = spriteParado;
-        // devuelvo la altura original
-        transform.localScale = new Vector3(transform.localScale.x, escalaYParado, transform.localScale.z);
-        if (colliderParado != null) colliderParado.enabled = true;
-        if (colliderAgachado != null) colliderAgachado.enabled = false;
+        crouching = false;
+        if (standingCollider != null) standingCollider.enabled = true;
+        if (crouchingCollider != null) crouchingCollider.enabled = false;
     }
 
-    void AplicarGravedadExtra()
+    void ApplyExtraGravity()
     {
         // si esta cayendo, le sumo gravedad extra para que caiga mas pesado
         if (rb.linearVelocity.y < 0f)
         {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (multiplicadorCaida - 1f) * Time.fixedDeltaTime;
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1f) * Time.fixedDeltaTime;
         }
         // si esta subiendo pero ya solto la tecla, tambien lo hago bajar mas rapido
-        else if (rb.linearVelocity.y > 0f && !manteniendoSalto)
+        else if (rb.linearVelocity.y > 0f && !holdingJump)
         {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (multiplicadorSubida - 1f) * Time.fixedDeltaTime;
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (riseMultiplier - 1f) * Time.fixedDeltaTime;
         }
     }
 
     void OnDrawGizmosSelected()
     {
-        if (piesCheck == null) return;
+        if (standingCollider == null) return;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(piesCheck.position, volumenCaja);
+        Vector2 pos = new Vector2(standingCollider.bounds.center.x, standingCollider.bounds.min.y);
+        Gizmos.DrawWireCube(pos, groundCheckSize);
     }
 }
