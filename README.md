@@ -8,6 +8,7 @@
 
 - katze: busqueda de assets
 
+- thiago(blakjy): traduccion de variables y high concept
 
 Juego estilo Dino de Chrome endless runner sidescroll
 

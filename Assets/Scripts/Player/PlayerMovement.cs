@@ -7,19 +7,19 @@ public class PlayerMovement : MonoBehaviour
     [Range(0f, 1f)]
     public float jumpCut = 0.5f; // cuanto se le baja al salto si suelta antes
 
-    [Header("Sensacion de salto")]
+    [Header("Jump Feeling")]
     public float fallMultiplier = 2.5f;  // que tan pesado cae (mas alto = cae mas rapido)
     public float riseMultiplier = 2f;    // baja mas rapido si ya suelto la tecla subiendo
 
     public Vector2 groundCheckSize = new Vector2(0.5f, 0.1f);
     public LayerMask groundLayer;
 
-    [Header("Agacharse")]
+    [Header("Crouch Movement")]
     public bool cantJumpCrouched = true;
     public Collider2D standingCollider;
     public Collider2D crouchingCollider;
 
-    [Header("Caida rapida")]
+    [Header("Heavy Fall")]
     public float fastFallForce = 80f;     // agacharse en el aire empuja para abajo
     public float maxFallSpeed = 25f;
 
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        rb.freezeRotation = true; // que no gire por el p*to Rigidbody2D dynamic 
+        rb.freezeRotation = true; // que no gire por el Rigidbody2D dynamic 
     }
 
     void Update()

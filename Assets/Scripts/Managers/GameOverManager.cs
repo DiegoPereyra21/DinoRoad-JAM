@@ -9,14 +9,14 @@ public class GameOverManager : MonoBehaviour
     public TextMeshProUGUI textFinalCoin;
     void Start()
     {
-        int puntajeFinal = PlayerPrefs.GetInt("FinalScore", 0);
-        textFinalScore.text = "Score: " + puntajeFinal.ToString();
+        int FinalScore = PlayerPrefs.GetInt("FinalScore", 0);
+        textFinalScore.text = "Score: " + FinalScore.ToString();
 
-        int mejorPuntaje = PlayerPrefs.GetInt("Highscore", 0);
-        textHighscore.text = "Max Score: " + mejorPuntaje.ToString();
+        int BestScore = PlayerPrefs.GetInt("Highscore", 0);
+        textHighscore.text = "Max Score: " + BestScore.ToString();
 
-        int coinTotal = CoinManager.TotalCoins;
-        textFinalCoin.text = "Coins: " + coinTotal.ToString();
+        int TotalCoins = CoinManager.TotalCoins;
+        textFinalCoin.text = "Coins: " + TotalCoins.ToString();
 
     }
 }

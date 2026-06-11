@@ -43,7 +43,7 @@ public class ButtonScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("No te alcanza");
+            Debug.Log("Not enough coins");
         }
     }
 

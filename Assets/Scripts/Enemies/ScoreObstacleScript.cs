@@ -9,7 +9,7 @@ public class ScoreObstacleScript : MonoBehaviour
         if (collision.tag == "Player")
         {
             CoinManager.TotalCoins += rewardCoins;
-            Debug.Log($"Sumadas: {rewardCoins}   .    Total: {CoinManager.TotalCoins}");
+            Debug.Log($"Added: {rewardCoins}   .    Total: {CoinManager.TotalCoins}");
         }
     }
 }
