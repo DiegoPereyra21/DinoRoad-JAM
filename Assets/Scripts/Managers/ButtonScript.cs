@@ -81,19 +81,30 @@ public class ButtonScript : MonoBehaviour
         if(PlayerPrefs.GetInt("EquippedDinoIndex", 0) == dinoIndex)
         {
             PlayerPrefs.SetInt("EquippedDinoIndex", 0);
-            //mensaje de dino desequipado
+            //ESTO ME FALTABA, porque no entendia porque me aparecia unequip en mas de un dino
+            updateButtonText();
         }else
         {
             //si era otro dino, lo equipa
             PlayerPrefs.SetInt("EquippedDinoIndex", dinoIndex);
+            //esto me habia olvidado, completamente necesario para avisarle antes a los demas
+            PlayerPrefs.Save();
+
+
+            //No es la mejor practica ni de lejos, pero prefiero esto antes que tener 3 referencias mas a botones en este script
+            ButtonScript[] todosLosBotones = FindObjectsByType<ButtonScript>(FindObjectsSortMode.None);
+
+            //cada que equipa algo le avisa a los demas de que actualicen y vean que hubo un cambio
+            foreach (ButtonScript boton in todosLosBotones)
+            {
+                boton.updateButtonText();
+            }
         }
-        // Guardamos el número de dino seleccionado
+
+        //no me gusto la solucion pero es lo mejor para ser rapidos
         PlayerPrefs.Save();
-        //mensaje o alguna forma de mostrar que esta equipado
-        Debug.Log("Equipado el dino: " + dinoIndex);
-        //cambiamos el mensaje del boton automaticamente luego del click
-        updateButtonText();
     }
+
 
     //funcion que cambia el boton entre equipado o desequipado (faltaria algun efecto visual pero no creo que de tiempo)
     private void updateButtonText()
