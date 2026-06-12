@@ -7,7 +7,7 @@ public class SpawnerScript : MonoBehaviour
     [SerializeField] private GameObject[] obstacleNivel2Prefabs;
     public float obstacleSpawnInterval = 2f;
     private float timeUntilNextSpawn;
-    private float increase= 0.1f;
+    private float increase= 0.085f;
 
     [SerializeField] private GameObject scoreObject;
     private Score scoreScript;

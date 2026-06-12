@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4220593154791764534}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.21, z: 0}
+  m_LocalPosition: {x: 0, y: 1.479, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -136,9 +136,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.1136297, y: 0.27469498}
-      - {x: -0.58514196, y: -0.29356354}
-      - {x: 0.6732484, y: 0.25242782}
+    - - {x: -1.190951, y: 0.27469498}
+      - {x: -0.62196153, y: -0.30829138}
+      - {x: 1.0451267, y: 0.34079492}
   m_UseDelaunayMesh: 0
 --- !u!95 &5373033548869046336
 Animator:
@@ -175,8 +175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  flyAmplitude: 1
-  flySpeed: 3
 --- !u!1 &4953423085338472889
 GameObject:
   m_ObjectHideFlags: 0
