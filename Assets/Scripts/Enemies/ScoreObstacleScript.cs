@@ -1,15 +1,10 @@
-using System.Threading;
 using UnityEngine;
-
-public class ScoreObstacleScript : MonoBehaviour
+//recompensa x cada obstaculo
+public class ScoreObstacleScript : MonoBehaviour, IRecolectable
 {
     public int rewardCoins = 1;
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Recolectar()
     {
-        if (collision.tag == "Player")
-        {
-            CoinManager.TotalCoins += rewardCoins;
-            Debug.Log($"Added: {rewardCoins}   .    Total: {CoinManager.TotalCoins}");
-        }
+        CoinManager.TotalCoins += rewardCoins;
     }
 }

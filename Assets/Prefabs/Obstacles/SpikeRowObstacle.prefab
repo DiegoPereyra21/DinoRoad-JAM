@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2231341942799521859}
   - component: {fileID: -4808461337147730559}
   - component: {fileID: -5404549236580587187}
+  - component: {fileID: 3652899940318765789}
   m_Layer: 0
   m_Name: SpikeRowObstacle
   m_TagString: Obstacle
@@ -121,6 +122,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardCoins: 2
+--- !u!114 &3652899940318765789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446918257996217708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c58b8da2a214e14391679802a6a67e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8636106665205256114
 GameObject:
   m_ObjectHideFlags: 0

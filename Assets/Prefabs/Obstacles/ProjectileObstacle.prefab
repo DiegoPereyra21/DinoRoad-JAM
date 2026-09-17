@@ -136,9 +136,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.190951, y: 0.27469498}
-      - {x: -0.62196153, y: -0.30829138}
-      - {x: 1.0451267, y: 0.34079492}
+    - - {x: -0.8120254, y: 0.29995662}
+      - {x: -0.12935838, y: -0.28302974}
+      - {x: 0.5777853, y: 0.32816398}
   m_UseDelaunayMesh: 0
 --- !u!95 &5373033548869046336
 Animator:
@@ -174,7 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25a268de0c9b9440bdcbeb6a32282be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
 --- !u!1 &4953423085338472889
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +186,7 @@ GameObject:
   - component: {fileID: 4663838893393016084}
   - component: {fileID: 4277803198060106314}
   - component: {fileID: -2456755452374852196}
+  - component: {fileID: 3249573640555117163}
   m_Layer: 0
   m_Name: ProjectileObstacle
   m_TagString: Obstacle
@@ -296,3 +296,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardCoins: 3
+--- !u!114 &3249573640555117163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4953423085338472889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c58b8da2a214e14391679802a6a67e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

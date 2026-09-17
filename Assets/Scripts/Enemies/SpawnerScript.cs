@@ -1,19 +1,22 @@
+using System.Collections;
 using UnityEngine;
-
+//refactorizado para tener el spawner tanto de los enemgios basicos como nivel 2
 public class SpawnerScript : MonoBehaviour
 {
-    //array con los prefabs de los obstaculos
+    //spawners
     [SerializeField] private GameObject[] obstaclePrefabs;
     [SerializeField] private GameObject[] obstacleNivel2Prefabs;
+    [SerializeField] private float speedObstacle = 5f;
     public float obstacleSpawnInterval = 2f;
     private float timeUntilNextSpawn;
-    private float increase= 0.085f;
-
+    private float increase = 0.085f;
+    //puntajes
     [SerializeField] private GameObject scoreObject;
     private Score scoreScript;
+    //frenesi
+    [SerializeField] private float multiplicadorVelocidadFrenesi = 1.5f;
 
-    [SerializeField] private float speedObstacle = 5f;
-
+    private readonly ObstaclePool pool = new ObstaclePool();
 
     private void Start()
     {
@@ -24,10 +27,9 @@ public class SpawnerScript : MonoBehaviour
         speedObstacle += increase * Time.deltaTime;
         SpawnLoop();
     }
-
+    //temposizador para q spawneen enemgios
     private void SpawnLoop()
     {
-        //Temporizador entre cada spawn de obstaculo
         timeUntilNextSpawn += Time.deltaTime;
         if (timeUntilNextSpawn >= obstacleSpawnInterval)
         {
@@ -35,36 +37,33 @@ public class SpawnerScript : MonoBehaviour
             timeUntilNextSpawn = 0f;
         }
     }
-
+    //spawner
     private void SpawnObstacle()
     {
-        if(scoreScript.nivel2 == false)
+        GameObject[] prefabsDisponibles = scoreScript.Nivel2 ? obstacleNivel2Prefabs : obstaclePrefabs;
+        GameObject prefabElegido = prefabsDisponibles[Random.Range(0, prefabsDisponibles.Length)];
+
+        GameObject obstacle = pool.Obtener(prefabElegido, transform.position);
+
+        float velocidadFinal = GameManager.Instance.FrenesiActivo
+            ? speedObstacle * multiplicadorVelocidadFrenesi
+            : speedObstacle;
+
+        if (obstacle.TryGetComponent<IObstaculoMovible>(out var movible))
         {
-            //elige aleatoriamente un prefab del array y lo instancia en la posicion del spawner con su misma rotacion
-            GameObject obstacleToSpawn = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
-            GameObject obstacle = Instantiate(obstacleToSpawn, transform.position, Quaternion.identity);
-            //le doy movimiento perpetuo hacia la izquierda al obstaculo con una respectiva velocidad
-            Rigidbody2D rb = obstacle.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                rb.linearVelocity = Vector2.left * speedObstacle;
-            }
-            Destroy(obstacle, 5f);
+            movible.ConfigurarVelocidad(velocidadFinal);
         }
-        else
-        {
-            //elige aleatoriamente un prefab del array y lo instancia en la posicion del spawner con su misma rotacion
-            GameObject obstacleToSpawn = obstacleNivel2Prefabs[Random.Range(0, obstacleNivel2Prefabs.Length)];
-            GameObject obstacle = Instantiate(obstacleToSpawn, transform.position, Quaternion.identity);
-            //le doy movimiento perpetuo hacia la izquierda al obstaculo con una respectiva velocidad
-            Rigidbody2D rb = obstacle.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                rb.linearVelocity = Vector2.left * speedObstacle;
-            }
-            Destroy(obstacle, 5f);
-        }
-        
+
+        StartCoroutine(DevolverDespuesDe(obstacle, 5f));
+    }
+    private IEnumerator DevolverDespuesDe(GameObject obstaculo, float segundos)
+    {
+        yield return new WaitForSeconds(segundos);
+        pool.Devolver(obstaculo);
     }
 
+    public void ApplyVelocidadMultiplicador(float multiplicador)
+    {
+        speedObstacle *= multiplicador;
+    }
 }

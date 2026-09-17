@@ -5,15 +5,14 @@ public class MenuSystem : MonoBehaviour
 {
     public void Play()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Game");
     }
 
     public void Return()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+        SceneManager.LoadScene("MainMenu");
     }
 
- 
     public void Quit()
     {
         Debug.Log("Quit");

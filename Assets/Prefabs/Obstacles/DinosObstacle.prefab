@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 71262398567428749}
   - component: {fileID: 7068747624702514922}
   - component: {fileID: 2356816474071672537}
+  - component: {fileID: 479640803770767738}
   m_Layer: 0
   m_Name: DinosObstacle
   m_TagString: Obstacle
@@ -609,6 +610,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardCoins: 5
+--- !u!114 &479640803770767738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2391205717052931955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c58b8da2a214e14391679802a6a67e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5310556878185692172
 GameObject:
   m_ObjectHideFlags: 0

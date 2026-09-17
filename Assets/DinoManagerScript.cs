@@ -2,19 +2,36 @@ using UnityEngine;
 
 public class DinoManagerScript : MonoBehaviour
 {
-    //referencias a cada dino, aunque esten desactivados
     public GameObject[] dinosaurios;
+
+    [Header("Referencias para aplicar el bonus de velocidad del personaje equipado")]
+    [SerializeField] private SpawnerScript spawner;
+    [SerializeField] private Background[] fondos;
+
+    private readonly PersonajeBase[] personajes = { new Dino(), new Dino1(), new Dino2(), new Dino3() };
 
     void Start()
     {
-        //verifica que dino esta equipado, por defecto 0
         int indiceEquipado = PlayerPrefs.GetInt("EquippedDinoIndex", 0);
 
-        //para recorrer la lista de dinos 
         for (int i = 0; i < dinosaurios.Length; i++)
         {
-            //verifica en cada caso si el indice coincide
             dinosaurios[i].SetActive(i == indiceEquipado);
+        }
+
+        AplicarStats(dinosaurios[indiceEquipado], personajes[indiceEquipado]);
+    }
+
+    private void AplicarStats(GameObject dino, PersonajeBase personaje)
+    {
+        PlayerMovement movement = dino.GetComponent<PlayerMovement>();
+        if (movement != null) movement.jumpForce = personaje.Salto;
+
+        if (spawner != null) spawner.ApplyVelocidadMultiplicador(personaje.MultiplicadorVelocidad);
+
+        foreach (Background fondo in fondos)
+        {
+            if (fondo != null) fondo.scrollSpeed *= personaje.MultiplicadorVelocidad;
         }
     }
 }

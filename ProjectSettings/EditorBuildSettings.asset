@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoserScreen.unity
     guid: 157d3430c413a2247a0a9bbc655b1687
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: c2c49b5e837e7364fa8ebdeb0d6ef780
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

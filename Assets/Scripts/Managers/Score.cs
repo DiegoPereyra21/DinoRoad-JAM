@@ -4,40 +4,66 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     [SerializeField] private float score = 0;
-    public TextMeshProUGUI scoreText;
     [SerializeField] private float scoreMultiplier = 1f;
-    public int finalScore;
-    public bool nivel2 = false;
+    [SerializeField] private int scoreParaGanar = 400;
+    [SerializeField] private float distanciaEntreFrenesi = 150f;
+    [SerializeField] private float duracionFrenesi = 5f;
+    [SerializeField] private float multiplicadorScoreFrenesi = 2f;
+
+    public TextMeshProUGUI scoreText;
+
+    public int FinalScore { get; private set; }
+    public bool Nivel2 { get; private set; }
+
+    private bool partidaTerminada = false;
+    private float proximoFrenesi;
+
     void Start()
     {
         scoreText.text = "Score: " + score.ToString();
+        proximoFrenesi = distanciaEntreFrenesi;
     }
 
     void Update()
     {
-        addscore(1 * Time.deltaTime * scoreMultiplier);
+        float factorFrenesi = GameManager.Instance.FrenesiActivo ? multiplicadorScoreFrenesi : 1f;
+        AddScore(1 * Time.deltaTime * scoreMultiplier * factorFrenesi);
         scoreMultiplier += 0.001f;
-        if (score > 100 && nivel2 == false)
+        //salto a nivel 2, quizas con los cambios sea algo pronto, vere de cambiarlo
+        if (score > 100 && !Nivel2)
         {
-            nivel2 = true;
+            Nivel2 = true;
+        }
+
+        if (FinalScore >= proximoFrenesi)
+        {
+            proximoFrenesi += distanciaEntreFrenesi;
+            GameManager.Instance.ActivarFrenesi(duracionFrenesi);
+        }
+
+        if (FinalScore >= scoreParaGanar && !partidaTerminada)
+        {
+            partidaTerminada = true;
+            SaveScore();
+            GameManager.Instance.Ganar();
         }
     }
-    public void addscore(float points)
+    private void AddScore(float points)
     {
         score += points;
-        finalScore = Mathf.FloorToInt(score);
-        scoreText.text = "Score: " + finalScore.ToString();
+        FinalScore = Mathf.FloorToInt(score);
+        scoreText.text = "Score: " + FinalScore.ToString();
     }
-
-    public void saveScore()
+    //guardado en playerprefs, no es seguro pero funciona bien en web
+    public void SaveScore()
     {
-        PlayerPrefs.SetInt("FinalScore", finalScore);
+        PlayerPrefs.SetInt("FinalScore", FinalScore);
 
         int highscore = PlayerPrefs.GetInt("Highscore", 0);
 
-        if (finalScore > highscore)
+        if (FinalScore > highscore)
         {
-            PlayerPrefs.SetInt("Highscore", finalScore);
+            PlayerPrefs.SetInt("Highscore", highscore = FinalScore);
         }
 
         PlayerPrefs.Save();
