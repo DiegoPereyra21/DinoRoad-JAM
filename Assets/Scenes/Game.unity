@@ -1320,10 +1320,10 @@ MonoBehaviour:
   obstacleNivel2Prefabs:
   - {fileID: 2391205717052931955, guid: dba4190038bb6fe4996368a323a006fb, type: 3}
   - {fileID: 3943479899042679489, guid: 632baf3ad3a6cf1428942c6e338b71dc, type: 3}
+  speedObstacle: 10
   obstacleSpawnInterval: 1
   scoreObject: {fileID: 1752757881}
-  speedObstacle: 13
-  multiplicadorVelocidadFrenesi: 1.5
+  multiplicadorVelocidadFrenesi: 1.3
 --- !u!1 &572596698
 GameObject:
   m_ObjectHideFlags: 0
@@ -4823,7 +4823,7 @@ MonoBehaviour:
   score: 0
   scoreMultiplier: 1
   scoreParaGanar: 400
-  distanciaEntreFrenesi: 150
+  distanciaEntreFrenesi: 60
   duracionFrenesi: 5
   multiplicadorScoreFrenesi: 2
   scoreText: {fileID: 572596699}
